@@ -89,11 +89,13 @@ public class MainActivity extends Activity implements SensorEventListener {
         mSensorManager.getOrientation(rationValue, value);
 //        if(event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
             int degrees = (int) Math.toDegrees(value[0]);
-            Log.d(TAG, "" + value[0]);
+        int horizontal = (int)Math.toDegrees(value[2]);
+//            Log.d(TAG, "" + value[0] + " " + value[1] + " " + value[2]);
+//        Log.i(TAG,"" + degrees + " " + horizontal);
         if(degrees <0){
             degrees = 360+degrees;
         }
-            mView.setPoint(-degrees);
+            mView.setPoint(-degrees,horizontal);
 //        }
     }
 
