@@ -20,7 +20,7 @@ public class NeedleView extends View {
     private int x,y = 0;
 
     private int horizontal;
-    private static float MAX_horizontal = 30;
+    private static int MAX_horizontal = 30;
     private volatile long lastModify;
 
     private static final String TAG = "needle";
@@ -71,11 +71,15 @@ public class NeedleView extends View {
         canvas.drawLine(x,y,lineX,lineY,linePaint);
         canvas.drawLine(20,40,this.getWidth()-20,40,linePaint);
         if(horizontal>MAX_horizontal){
-            horizontal = (int)MAX_horizontal;
+            horizontal = MAX_horizontal;
+        }else if(horizontal < -MAX_horizontal){
+            horizontal = -MAX_horizontal;
         }
-        float percent = horizontal/MAX_horizontal;
+        float percent = (float)horizontal/(float)MAX_horizontal;
         float point = x + (x-20)*percent;
-        Log.d(TAG,"" + point + " " + percent);
-        canvas.drawLine(point-5,40,point+5,40,circlePaint);
+        Log.d(TAG,"point:" + point + "horizontal: " + horizontal + "percent:" + percent);
+//        canvas.drawLine(point-5,40,point+5,40,circlePaint);
+        canvas.drawCircle(point,40,10,circlePaint);
     }
+
 }
